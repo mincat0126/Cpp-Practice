@@ -1,1 +1,1 @@
-# Cpp Practice
+# C++ 독학일지
