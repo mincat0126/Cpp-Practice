@@ -22,6 +22,7 @@
     <ClInclude Include="Turboc.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="if_practice.cpp" />
     <ClCompile Include="test.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
