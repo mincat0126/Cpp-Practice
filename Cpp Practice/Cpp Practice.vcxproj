@@ -22,7 +22,9 @@
     <ClInclude Include="Turboc.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="if_practice.cpp" />
+    <ClCompile Include="if_practice.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="test.cpp">
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
