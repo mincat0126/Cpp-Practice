@@ -29,8 +29,5 @@
     <ClCompile Include="if_practice.cpp">
       <Filter>소스 파일\practice</Filter>
     </ClCompile>
-    <ClCompile Include="switch_practice.cpp">
-      <Filter>소스 파일\practice</Filter>
-    </ClCompile>
   </ItemGroup>
 </Project>
