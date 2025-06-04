@@ -2,7 +2,10 @@
 
 int main()
 {
-	123;
-	char str[5] = { 1,2,3,4,5 };
-	str[2] = 'A';
+	int i = 1;
+	do
+	{
+		printf("%d", i);
+		i--;
+	} while (i > 2);
 }
