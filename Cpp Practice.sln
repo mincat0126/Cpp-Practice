@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Cpp Practice", "Cpp Practic
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "tommorow_day", "tommorow_day\tommorow_day.vcxproj", "{9AE5F83A-9C76-4D8F-B339-47E8960FE6C8}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "projects", "projects", "{C8D5274F-AC00-46C7-1F8D-E88E81087A52}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +36,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{9AE5F83A-9C76-4D8F-B339-47E8960FE6C8} = {C8D5274F-AC00-46C7-1F8D-E88E81087A52}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {81456B41-B67D-483E-B5E2-D1ED07C2CFB6}
