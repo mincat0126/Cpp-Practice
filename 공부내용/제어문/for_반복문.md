@@ -31,7 +31,8 @@ void main()
      scanf("%d",&Num2);
 
      i=1;
-     for (;;) {
+     for (;;) 
+     {
           if (i % Num1 == 0  && i % Num2 == 0)
               break;
           i+=1;
