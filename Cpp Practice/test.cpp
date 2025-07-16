@@ -8,4 +8,4 @@ int main()
 		printf("%d", i+100);
 		i--;
 	} while (i > 2);
-}
+}	
