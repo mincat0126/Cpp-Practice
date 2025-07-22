@@ -4,7 +4,7 @@ void gotoxy(int x, int y);
 
 void main()
 {
-
+		
 }
 
 void gotoxy(int x, int y)
