@@ -134,5 +134,28 @@ void main()
                 putch('i');
             }
         }
+
+        //적군 피격 판정
+        for (i = 0; i < MAXBALL; i++)
+        {
+            if (Enemy[i].exist == FALSE)
+                continue;
+
+            if (Enemy[i].y == by && abs(Enemy[i].x - bx) <= 2)
+            {
+                gotoxy(bx, by);
+                putch(' ');
+                bx = -1;
+
+                Enemy[i].exist = FALSE;
+                gotoxy(Enemy[i].x - 3, Enemy[i].y);
+                puts("     ");
+
+                Score += 7 - Enemy[i].nFrame;
+                break;
+            }
+        }
+
+        //적군 총알 이동
     }
 }
