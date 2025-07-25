@@ -106,14 +106,18 @@ void main()
                     Enemy[i].y = random(10) + 1;
                     for (bFound = FALSE, j = 0; j < MAXENEMY; j++)
                     {
-                        if (Enemy[i].exist == TRUE && Enemy[i].y == Enemy[i].y)
+                        if (Enemy[j].exist == TRUE && Enemy[j].y == Enemy[i].y)
                         {
                             bFound = TRUE;
                             break;
                         }
+                        if (bFound == FALSE)
+                        {
+                            break;
+                        }
                     }
                     Enemy[i].nFrame = Enemy[i].nStay = random(6) + 1;
-                    Enemy[i].Type = random(sizeof(arEnemy)/sizeof(arEnemy[i]));
+                    Enemy[i].Type = random(sizeof(arEnemy)/sizeof(arEnemy[0]));
                     Enemy[i].exist = TRUE;
                 }
             }
@@ -130,7 +134,7 @@ void main()
             else
             {
                 by--;
-                goyoxy(bx, by);
+                gotoxy(bx, by);
                 _putch('i');
             }
         }
@@ -149,7 +153,7 @@ void main()
 
                 Enemy[i].exist = FALSE;
                 gotoxy(Enemy[i].x - 3, Enemy[i].y);
-                puts("     ");
+                puts("       ");
 
                 Score += 7 - Enemy[i].nFrame;
                 break;
@@ -162,7 +166,7 @@ void main()
             if (Ball[i].exist == FALSE)
                 continue;
 
-            if (Ball[i].nStay == 0)
+            if (--Ball[i].nStay == 0)
             {
                 Ball[i].nStay = Ball[i].nFrame;
                 gotoxy(Ball[i].x, Ball[i].y);
@@ -173,7 +177,7 @@ void main()
                 else
                 {
                     Ball[i].y++;
-                    goyoxy(Ball[i].x, Ball[i].y);
+                    gotoxy(Ball[i].x, Ball[i].y);
                     _putch('*');
                 }
             }
@@ -220,13 +224,13 @@ void main()
                     //적 총알 발사
                     if (random(40) == 0)
                     {
-                        for (i = 0; i < MAXBALL &&Ball[i].exist == TRUE; i++) { ; }
-                        if (i != MAXBALL)
+                        for (j = 0; j < MAXBALL && Ball[j].exist == TRUE; j++) { ; }
+                        if (j != MAXBALL)
                         {
-                            Ball[i].x = Enemy[i].x + 2;
-                            Ball[i].y = Enemy[i].y + 1;
-                            Ball[i].nFrame = Ball[i].nStay = Enemy[i].nFrame * 6;
-                            Ball[i].exist = TRUE;
+                            Ball[j].x = Enemy[i].x + 2;
+                            Ball[j].y = Enemy[i].y + 1;
+                            Ball[j].nFrame = Ball[j].nStay = Enemy[i].nFrame * 6;
+                            Ball[j].exist = TRUE;
                         }
                     }
                 }
@@ -239,7 +243,7 @@ void main()
         gotoxy(0, 24);
         printf("점수=%d", Score);
 
-        delay(100);
+        delay(10);
     }
 end:
     setcursortype(NORMALCURSOR);
