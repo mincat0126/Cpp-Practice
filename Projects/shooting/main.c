@@ -194,6 +194,52 @@ void main()
                 goto end;
             }
         }
+
+        //적 이동
+        for (i = 0; i < MAXENEMY; i++)
+        {
+            if (Enemy[i].exist == FALSE)
+                continue;
+
+            if (Enemy[i].nStay == 0)
+            {
+                Enemy[i].nStay = Enemy[i].nFrame;
+
+                if (Enemy[i].x >= 76 || Enemy[i].x <= 4)
+                {
+                    Enemy[i].exist = FALSE;
+                    gotoxy(Enemy[i].x - 3, Enemy[i].y);
+                    puts("     ");
+                }
+                else
+                {
+                    Enemy[i].x += Enemy[i].Delta;
+                    gotoxy(Enemy[i].x - 3, Enemy[i].y);
+                    puts(arEnemy[Enemy[i].Type]);
+
+                    //적 총알 발사
+                    if (random(40) == 0)
+                    {
+                        for (i = 0; i < MAXBALL &&Ball[i].exist == TRUE; i++) { ; }
+                        if (i != MAXBALL)
+                        {
+                            Ball[i].x = Enemy[i].x + 2;
+                            Ball[i].y = Enemy[i].y + 1;
+                            Ball[i].nFrame = Ball[i].nStay = Enemy[i].nFrame * 6;
+                            Ball[i].exist = TRUE;
+                        }
+                    }
+                }
+            }
+        }
+
+        //플레이어
+        gotoxy(fx - 3, 23);
+        puts(" <<A>> ");
+        gotoxy(0, 24);
+        printf("점수=%d", Score);
+
+        delay(100);
     }
 end:
     setcursortype(NORMALCURSOR);
