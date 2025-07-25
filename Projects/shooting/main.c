@@ -123,7 +123,7 @@ void main()
         if (bx != -1)
         {
             gotoxy(bx, by);
-            putch(' ');
+            _putch(' ');
 
             if (by == 0)
                 bx = -1;
@@ -131,7 +131,7 @@ void main()
             {
                 by--;
                 goyoxy(bx, by);
-                putch('i');
+                _putch('i');
             }
         }
 
@@ -144,7 +144,7 @@ void main()
             if (Enemy[i].y == by && abs(Enemy[i].x - bx) <= 2)
             {
                 gotoxy(bx, by);
-                putch(' ');
+                _putch(' ');
                 bx = -1;
 
                 Enemy[i].exist = FALSE;
@@ -157,5 +157,28 @@ void main()
         }
 
         //적군 총알 이동
+        for (i = 0; i < MAXBALL; i++)
+        {
+            if (Ball[i].exist == FALSE)
+                continue;
+
+            if (Ball[i].nStay == 0)
+            {
+                Ball[i].nStay = Ball[i].nFrame;
+                gotoxy(Ball[i].x, Ball[i].y);
+                _putch(' ');
+
+                if (Ball[i].y >= 23)
+                    Ball[i].exist = FALSE;
+                else
+                {
+                    Ball[i].y++;
+                    goyoxy(Ball[i].x, Ball[i].y);
+                    _putch('*');
+                }
+            }
+        }
     }
+end:
+    setcursortype(NORMALCURSOR);
 }
