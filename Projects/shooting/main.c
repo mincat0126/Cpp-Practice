@@ -178,6 +178,22 @@ void main()
                 }
             }
         }
+
+        //아군 피격 판정
+        for (i = 0; i < MAXBALL; i++)
+        {
+            if (Ball[i].exist == FALSE)
+                continue;
+
+            if (Ball[i].y == 23 && abs(Ball[i].x - fx) <= 2)
+            {
+                gotoxy(fx - 3, 21); puts("   .   ");
+                gotoxy(fx - 3, 22); puts(" .  . .");
+                gotoxy(fx - 3, 23); puts("..:V:..");
+                delay(2000);
+                goto end;
+            }
+        }
     }
 end:
     setcursortype(NORMALCURSOR);
