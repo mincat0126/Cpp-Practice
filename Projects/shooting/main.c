@@ -143,7 +143,7 @@ void main()
         //적군 피격 판정
         for (i = 0; i < MAXENEMY; i++)
         {
-            if (Enemy[i].exist == FALSE)
+            if (Enemy[i].exist == FALSE||Enemy[i].Type==-1)
                 continue;
 
             if (Enemy[i].y == by && abs(Enemy[i].x - bx) <= 2)
@@ -152,11 +152,13 @@ void main()
                 _putch(' ');
                 bx = -1;
 
-                Enemy[i].exist = FALSE;
+                //Enemy[i].exist = FALSE;
+                Enemy[i].Type = -1;
                 gotoxy(Enemy[i].x - 3, Enemy[i].y);
-                puts("       ");
+                puts(" .,:,. ");
 
                 Score += 7 - Enemy[i].nFrame;
+                Enemy[i].nFrame = Enemy[i].nStay = 50;
                 break;
             }
         }
@@ -208,6 +210,14 @@ void main()
 
             if (--Enemy[i].nStay == 0)
             {
+                if (Enemy[i].Type == -1)
+                {
+                    gotoxy(Enemy[i].x - 3, Enemy[i].y);
+                    puts("       ");
+                    Enemy[i].exist == FALSE;
+                    continue;
+                }
+
                 Enemy[i].nStay = Enemy[i].nFrame;
 
                 if (Enemy[i].x >= 76 || Enemy[i].x <= 4)
