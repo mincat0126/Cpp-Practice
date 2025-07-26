@@ -206,7 +206,7 @@ void main()
             if (Enemy[i].exist == FALSE)
                 continue;
 
-            if (Enemy[i].nStay == 0)
+            if (--Enemy[i].nStay == 0)
             {
                 Enemy[i].nStay = Enemy[i].nFrame;
 
