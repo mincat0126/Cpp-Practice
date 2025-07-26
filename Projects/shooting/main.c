@@ -111,15 +111,16 @@ void main()
                             bFound = TRUE;
                             break;
                         }
-                        if (bFound == FALSE)
-                        {
-                            break;
-                        }
                     }
-                    Enemy[i].nFrame = Enemy[i].nStay = random(6) + 1;
-                    Enemy[i].Type = random(sizeof(arEnemy)/sizeof(arEnemy[0]));
-                    Enemy[i].exist = TRUE;
+
+                    if (bFound == FALSE)
+                    {
+                        break;
+                    }
                 }
+                Enemy[i].nFrame = Enemy[i].nStay = random(6) + 1;
+                Enemy[i].Type = random(sizeof(arEnemy) / sizeof(arEnemy[0]));
+                Enemy[i].exist = TRUE;
             }
         }
 
@@ -140,7 +141,7 @@ void main()
         }
 
         //적군 피격 판정
-        for (i = 0; i < MAXBALL; i++)
+        for (i = 0; i < MAXENEMY; i++)
         {
             if (Enemy[i].exist == FALSE)
                 continue;
@@ -213,7 +214,7 @@ void main()
                 {
                     Enemy[i].exist = FALSE;
                     gotoxy(Enemy[i].x - 3, Enemy[i].y);
-                    puts("     ");
+                    puts("       ");
                 }
                 else
                 {
