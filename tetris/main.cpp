@@ -60,7 +60,7 @@ void main()
     DrawScreen();
     nFrame = 20;
 
-    for (; 1;)
+    for (int j=0; j<1;j++)
     {
         brick = random(sizeof(Shape) / sizeof(Shape[0]));
         nx = BW / 2;
