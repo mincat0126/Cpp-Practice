@@ -160,10 +160,6 @@ BOOL MoveDown()
         TestFull();
         return TRUE;
     }
-    PrintBrick(FALSE);
-    ny++;
-    PrintBrick(TRUE);
-    return FALSE;
 }
 
 void TestFull()
@@ -244,15 +240,5 @@ BOOL ProcessKey()
                 break;
             }
         }
-        else
-        {
-            switch (ch)
-            {
-            case ' ':
-                while(MoveDown()==FALSE){;}
-                return TRUE;
-            }
-        }
     }
-    return FALSE;
 }
