@@ -11,13 +11,16 @@
 #define BH 20
 
 void DrawScreen();
+void PrintBrick(BOOL Show);
 
 struct Point
 {
 	int x, y;
 };
 
-Point Shape[][4][4] = {
+//블록 종류, 회전 모양, xy값
+Point Shape[][4][4] = 
+{
      { {0,0,1,0,2,0,-1,0}, {0,0,0,1,0,-1,0,-2}, {0,0,1,0,2,0,-1,0}, {0,0,0,1,0,-1,0,-2} },
      { {0,0,1,0,0,1,1,1}, {0,0,1,0,0,1,1,1}, {0,0,1,0,0,1,1,1}, {0,0,1,0,0,1,1,1} },
      { {0,0,-1,0,0,-1,1,-1}, {0,0,0,1,-1,0,-1,-1}, {0,0,-1,0,0,-1,1,-1}, {0,0,0,1,-1,0,-1,-1} },
@@ -55,6 +58,16 @@ void main()
         }
     }
     DrawScreen();
+    nFrame = 20;
+
+    for (; 1;)
+    {
+        brick = random(sizeof(Shape) / sizeof(Shape[0]));
+        nx = BW / 2;
+        ny = 3;
+        rot = 0;
+        PrintBrick(TRUE);
+    }
 }
 
 void DrawScreen()
@@ -74,4 +87,15 @@ void DrawScreen()
     gotoxy(50, 3); puts("Tetris Ver 1.0");
     gotoxy(50, 5); puts("좌우:이동, 위:회전, 아래:내림");
     gotoxy(50, 6); puts("공백:전부 내림");
+}
+
+void PrintBrick(BOOL Show)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        gotoxy(BX+(Shape[brick][rot][i].x+nx)*2,BY+(Shape[brick][rot][i].y+ny));
+        puts(arTile[Show ? BRICK : EMPTY]);
+    }
 }
