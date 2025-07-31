@@ -6,7 +6,59 @@
 #define DOWN 80
 #define ESC 27
 
+void InitGame();
+void DrawScreen(BOOL bHint);
+
+enum Status{HIDDEN, FLIP, TEMPFLIP};
+
+struct tag_Cell
+{
+	int Num;
+	Status St;
+};
+
+tag_Cell arCell[4][4];
+int nx, ny;
+int count = 0;
+
 void main()
+{
+	int ch;
+	int x, y;
+	randomize();
+	InitGame();
+}
+
+void InitGame()
+{
+	int i, j;
+	int x, y;
+
+	nx, ny = 0;
+	count = 0;
+
+	memset(arCell, 0, sizeof(arCell));
+
+	for (i = 0; i <= 8; i++)
+	{
+		for (j = 0; j < 2; j++)
+		{
+			do
+			{
+				x = random(4);
+				y = random(4);
+			} while (arCell[x][y].Num != 0);
+			arCell[x][y].Num = i;
+		}
+
+		DrawScreen(TRUE);
+		delay(2000);
+		clrscr();
+		DrawScreen(FALSE);
+	}
+}
+
+void BrawScreen(BOOL bHint)
 {
 
 }
