@@ -84,3 +84,4 @@ void setcursortype(CURSOR_TYPE c)
 #pragma once
 #pragma once
 #pragma once
+#pragma once

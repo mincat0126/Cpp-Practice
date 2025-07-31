@@ -22,7 +22,7 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{ea85a57c-497b-44a6-9da5-ca5e829250e4}</ProjectGuid>
+    <ProjectGuid>{10e87c69-ad00-403c-b935-a5734b67baa3}</ProjectGuid>
     <RootNamespace>CardMemory</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
