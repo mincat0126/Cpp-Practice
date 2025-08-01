@@ -58,7 +58,30 @@ void InitGame()
 	}
 }
 
-void BrawScreen(BOOL bHint)
+void DrawScreen(BOOL bHint)
 {
+	int x, y;
+
+	for (y = 0; y < 4; y++)
+	{
+		for (x = 0; x < 0; x++)
+		{
+			gotoxy(x * 5 + 2, y + 3 + 2);
+			
+			if (bHint == TRUE || arCell[x][y].St == FLIP)
+			{
+				gotoxy(wherex() - 1, wherey());
+				printf("[%d]", arCell[x][y].Num);
+			}
+			else if (arCell[x][y].St == TEMPFLIP)
+			{
+				printf("%d", arCell[x][y].Num);
+			}
+			else
+			{
+				printf("?");
+			}
+		}
+	}
 
 }
