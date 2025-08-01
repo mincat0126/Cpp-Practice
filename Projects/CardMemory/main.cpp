@@ -27,6 +27,47 @@ void main()
 	int x, y;
 	randomize();
 	InitGame();
+
+	for (;;)
+	{
+		gotoxy(nx * 5 + 2, ny * 3 + 2);
+
+		ch = _getch();
+		if (ch == 0xE0)
+		{
+			ch = _getch();
+			switch (ch)
+			{
+			case LEFT:
+				if (nx > 0)
+					nx--;
+				break;
+			case RIGHT:
+				if (nx < 3)
+					nx++;
+				break;
+			case UP:
+				if (ny > 0)
+					ny--;
+				break;
+			case DOWN:
+				if (ny < 3)
+					ny++;
+				break;
+			}
+		}
+		else
+		{
+			switch (ch)
+			{
+			case ESC:
+				exit(0);
+				break;
+			case ' ':
+
+			}
+		}
+	}
 }
 
 void InitGame()
