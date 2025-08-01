@@ -64,7 +64,7 @@ void main()
 				exit(0);
 				break;
 			case ' ':
-
+				break;
 			}
 		}
 	}
@@ -105,9 +105,9 @@ void DrawScreen(BOOL bHint)
 
 	for (y = 0; y < 4; y++)
 	{
-		for (x = 0; x < 0; x++)
+		for (x = 0; x < 4; x++)
 		{
-			gotoxy(x * 5 + 2, y + 3 + 2);
+			gotoxy(x * 5 + 2, y * 3 + 2);
 			
 			if (bHint == TRUE || arCell[x][y].St == FLIP)
 			{
