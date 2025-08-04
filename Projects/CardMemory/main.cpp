@@ -92,7 +92,7 @@ void main()
 						}
 						else
 						{
-							arCell[nx][ny].St == TEMPFLIP;
+							arCell[nx][ny].St = TEMPFLIP;
 							DrawScreen(FALSE);
 							delay(1000);
 							arCell[tx][ty].St = HIDDEN;
@@ -112,12 +112,12 @@ void InitGame()
 	int i, j;
 	int x, y;
 
-	nx, ny = 0;
+	nx= ny = 0;
 	count = 0;
 
 	memset(arCell, 0, sizeof(arCell));
 
-	for (i = 0; i <= 8; i++)
+	for (i = 1; i <= 8; i++)
 	{
 		for (j = 0; j < 2; j++)
 		{
@@ -128,12 +128,11 @@ void InitGame()
 			} while (arCell[x][y].Num != 0);
 			arCell[x][y].Num = i;
 		}
-
-		DrawScreen(TRUE);
-		delay(2000);
-		clrscr();
-		DrawScreen(FALSE);
 	}
+	DrawScreen(TRUE);
+	delay(2000);
+	clrscr();
+	DrawScreen(FALSE);
 }
 
 void DrawScreen(BOOL bHint)
