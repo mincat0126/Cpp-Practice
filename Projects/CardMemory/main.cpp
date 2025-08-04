@@ -21,7 +21,7 @@ struct tag_Cell
 
 tag_Cell arCell[4][4];
 int nx, ny;
-int count = 0;
+int count;
 
 void main()
 {
@@ -71,7 +71,7 @@ void main()
 					GetTempFlip(&tx, &ty);
 					if (tx == -1)
 					{
-						arCell[nx][ny].St == TEMPFLIP;
+						arCell[nx][ny].St = TEMPFLIP;
 					}
 					else
 					{
