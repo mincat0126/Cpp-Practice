@@ -8,6 +8,7 @@
 
 void InitGame();
 void DrawScreen(BOOL bHint);
+int GetTempFlip(int* tx, int* ty);
 
 enum Status{HIDDEN, FLIP, TEMPFLIP};
 
@@ -24,7 +25,7 @@ int count = 0;
 void main()
 {
 	int ch;
-	int x, y;
+	int tx, ty;
 	randomize();
 	InitGame();
 
@@ -64,7 +65,14 @@ void main()
 				exit(0);
 				break;
 			case ' ':
-				break;
+				if (arCell[nx][ny].St == HIDDEN)
+				{
+					GetTempFlip(&tx, &ty);
+					if (tx == -1)
+					{
+						arCell[nx][ny].St == TEMPFLIP;
+					}
+				}
 			}
 		}
 	}
@@ -124,5 +132,22 @@ void DrawScreen(BOOL bHint)
 			}
 		}
 	}
+}
 
+int GetTempFlip(int* tx, int* ty)
+{
+	int i, j;
+	for (i = 0; i < 4; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			if (arCell[i][j].St == TEMPFLIP)
+			{
+				*tx = i;
+				*ty = j;
+				return;
+			}
+		}
+	}
+	*tx = -1;
 }
