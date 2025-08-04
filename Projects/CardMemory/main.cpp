@@ -9,6 +9,7 @@
 void InitGame();
 void DrawScreen(BOOL bHint);
 void GetTempFlip(int* tx, int* ty);
+int GetRemain();
 
 enum Status{HIDDEN, FLIP, TEMPFLIP};
 
@@ -77,10 +78,30 @@ void main()
 						count++;
 						if (arCell[tx][ty].Num == arCell[nx][ny].Num)
 						{
+							_putch('\a');
+							arCell[tx][ty].St = FLIP;
+							arCell[nx][ny].St = FLIP;
 
+							if (GetRemain() == 0)
+							{
+								DrawScreen(FALSE);
+								gotoxy(26, 22); puts("축하합니다. 다시 시작합니다.");
+								delay(2000);
+								InitGame();
+							}
+						}
+						else
+						{
+							arCell[nx][ny].St == TEMPFLIP;
+							DrawScreen(FALSE);
+							delay(1000);
+							arCell[tx][ty].St = HIDDEN;
+							arCell[nx][ny].St = HIDDEN;
 						}
 					}
+					DrawScreen(FALSE);
 				}
+				break;
 			}
 		}
 	}
@@ -140,6 +161,11 @@ void DrawScreen(BOOL bHint)
 			}
 		}
 	}
+
+	gotoxy(30, 2); puts("짝 맞추기 게임 Ver 1.0");
+	gotoxy(30, 4); puts("커서키:이동. 공백:뒤집기. Esc:종료");
+	gotoxy(30, 6); printf("총 시도 회수 : %d", count);
+	gotoxy(30, 8); printf("아직 못 찾은 것 : %d ", GetRemain());
 }
 
 void GetTempFlip(int* tx, int* ty)
@@ -158,4 +184,20 @@ void GetTempFlip(int* tx, int* ty)
 		}
 	}
 	*tx = -1;
+}
+
+int GetRemain()
+{
+	int i, j;
+	int remain = 16;
+
+	for (i = 0; i < 4; i++)
+	{
+		for (j = 0; j < 4; j++)
+		{
+			if (arCell[i][j].St == FLIP)
+				remain--;
+		}
+	}
+	return remain;
 }
