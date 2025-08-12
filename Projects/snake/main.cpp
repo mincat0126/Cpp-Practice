@@ -29,7 +29,7 @@ void InitStage(int stage);
 
 void main()
 {
-	int eatNumber;
+	int eatFood;
 	int ch;
 	int x, y;
 
@@ -43,9 +43,9 @@ void main()
 		gotoxy(0, 23); printf("스테이지 : %d", stage + 1);
 		gotoxy(20, 23); printf("남은 기회 : %d", life);
 
-		for (eatNumber=0;eatNumber<maxFood;eatNumber++)
+		for (eatFood=0;eatFood<maxFood;eatFood++)
 		{
-			gotoxy(40, 23); printf("남은 먹이 : %d ", maxFood - eatNumber);
+			gotoxy(40, 23); printf("남은 먹이 : %d ", maxFood - eatFood);
 			gotoxy(60, 23); printf("꼬리 길이 : 2 ");
 			do
 			{
@@ -57,7 +57,31 @@ void main()
 			printf("%d", random(9) + 1);
 		}
 
-		if (eatNumber == maxFood)
+		if (eatFood == 0)
+		{
+			ch = _getch();
+			if (ch == 0xE0)
+				_getch();
+			else
+			{
+				if (ch == 27)
+				{
+					setcursortype(NORMALCURSOR);
+					exit(0);
+				}
+				if (tolower(ch) == 'n')
+				{
+					stage = (stage == 4 ? 0 : stage++);
+					break;
+				}
+				if (tolower(ch) == 'p')
+				{
+					stage = (stage == 0 ? 4 : stage--);
+				}
+			}
+		}
+
+		if (eatFood == maxFood)
 		{
 			gotoxy(12, 20);
 			puts("축하합니다. 아무 키나 누르시면 다음 스테이지로 갑니다.");
