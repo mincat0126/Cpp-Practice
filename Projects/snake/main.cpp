@@ -1,7 +1,9 @@
 #include "Turboc.h"
 
 #define QS 1600
-#define putchxy(x,y,ch) {gotoxy(x,y); putch;(ch);}
+#define putchxy(x,y,ch) {gotoxy(x,y); _putch;(ch);}
+
+int getchon(int x, int y);
 
 /*먹이 먹기
 움직이기
@@ -18,6 +20,7 @@ struct tag_Point
 
 tag_Point snake[QS];
 
+int maxFood;
 int life;
 int speed;
 int stage;
@@ -26,7 +29,7 @@ void InitStage(int stage);
 
 void main()
 {
-	int number;
+	int eatNumber;
 	int ch;
 	int x, y;
 
@@ -37,6 +40,30 @@ void main()
 	for (;;)
 	{
 		InitStage(stage);
+		gotoxy(0, 23); printf("스테이지 : %d", stage + 1);
+		gotoxy(20, 23); printf("남은 기회 : %d", life);
+
+		for (eatNumber=0;eatNumber<maxFood;eatNumber++)
+		{
+			gotoxy(40, 23); printf("남은 먹이 : %d ", maxFood - eatNumber);
+			gotoxy(60, 23); printf("꼬리 길이 : 2 ");
+			do
+			{
+				x = random(80);
+				y = random(22);
+			} while (getchon(x, y != ' '));
+
+			gotoxy(x, y);
+			printf("%d", random(9) + 1);
+		}
+
+		if (eatNumber == maxFood)
+		{
+			gotoxy(12, 20);
+			puts("축하합니다. 아무 키나 누르시면 다음 스테이지로 갑니다.");
+			delay(2000);
+			stage++;
+		}
 	}
 }
 
@@ -96,4 +123,18 @@ void InitStage(int stage)
 		speed = 50;
 		break;
 	}
+}
+
+//x,y 위치의 문자 조사
+int getchon(int x, int y)
+{
+	COORD Cur;
+	Cur.X = x;
+	Cur.Y = y;
+	TCHAR Char;
+	DWORD dwRead;
+
+	ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE),
+							   &Char, 1, Cur, &dwRead);
+	return Char;
 }
