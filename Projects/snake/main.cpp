@@ -4,6 +4,8 @@
 #define putchxy(x,y,ch) {gotoxy(x,y); _putch;(ch);}
 
 int getchon(int x, int y);
+void InitStage(int stage);
+BOOL MoveSnake();
 
 /*먹이 먹기
 움직이기
@@ -24,8 +26,6 @@ int maxFood;
 int life;
 int speed;
 int stage;
-
-void InitStage(int stage);
 
 void main()
 {
@@ -81,6 +81,10 @@ void main()
 			}
 		}
 
+		if (MoveSnake() == TRUE)
+		{
+		}
+
 		if (eatFood == maxFood)
 		{
 			gotoxy(12, 20);
@@ -115,20 +119,20 @@ void InitStage(int stage)
 	switch (stage)
 	{
 	case 0:
-	    speed = 150;
+		maxFood = 5; speed = 150;
 		for (i = 30; i <= 50; i++) { putchxy(i, 11, 'M'); }
 		break;
 	case 1:
-		 speed = 100;
+		maxFood = 10; speed = 100;
 		for (i = 20; i <= 60; i++) { putchxy(i, 7, 'M'); putchxy(i, 14, 'M'); }
 		break;
 	case 2:
-		 speed = 80;
+		maxFood = 15; speed = 80;
 		for (i = 20; i < 60; i++) { putchxy(i, 11, 'M'); }
 		for (i = 6; i <= 16; i++) { putchxy(40, i, 'M'); }
 		break;
 	case 3:
-		speed = 60;
+		maxFood = 20; speed = 60;
 		for (i = 20; i < 60; i++)
 		{
 			if (i < 30 || i > 50)
@@ -147,6 +151,11 @@ void InitStage(int stage)
 		speed = 50;
 		break;
 	}
+}
+
+BOOL MoveSnake()
+{
+
 }
 
 //x,y 위치의 문자 조사
