@@ -148,7 +148,7 @@ void InitStage(int stage)
 		}
 		break;
 	case 4:
-		speed = 50;
+		maxFood = 1970; speed = 50;
 		break;
 	}
 }
