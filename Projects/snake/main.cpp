@@ -51,7 +51,7 @@ void main()
 			{
 				x = random(80);
 				y = random(22);
-			} while (getchon(x, y != ' '));
+			} while (getchon(x,y)!=' ');
 
 			gotoxy(x, y);
 			printf("%d", random(9) + 1);
@@ -155,7 +155,10 @@ void InitStage(int stage)
 
 BOOL MoveSnake()
 {
+	for (;;)
+	{
 
+	}
 }
 
 //x,y 위치의 문자 조사
