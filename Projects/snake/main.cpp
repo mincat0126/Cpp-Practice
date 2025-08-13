@@ -25,7 +25,9 @@ struct tag_Point
 };
 
 tag_Point snake[QS];
+tag_Point now;
 
+int inctail;
 int head, tail;
 int maxFood;
 int life,speed;
@@ -59,34 +61,35 @@ void main()
 
 			gotoxy(x, y);
 			printf("%d", random(9) + 1);
-		}
 
-		if (eatenFood == 0)
-		{
-			ch = _getch();
-			if (ch == 0xE0)
-				_getch();
-			else
+			if (eatenFood == 0)
 			{
-				if (ch == 27)
+				ch = _getch();
+				if (ch == 0xE0)
+					_getch();
+				else
 				{
-					setcursortype(NORMALCURSOR);
-					exit(0);
-				}
-				if (tolower(ch) == 'n')
-				{
-					stage = (stage == 4 ? 0 : stage++);
-					break;
-				}
-				if (tolower(ch) == 'p')
-				{
-					stage = (stage == 0 ? 4 : stage--);
+					if (ch == 27)
+					{
+						setcursortype(NORMALCURSOR);
+						exit(0);
+					}
+					if (tolower(ch) == 'n')
+					{
+						stage = (stage == 4 ? 0 : stage++);
+						break;
+					}
+					if (tolower(ch) == 'p')
+					{
+						stage = (stage == 0 ? 4 : stage--);
+					}
 				}
 			}
-		}
 
-		if (MoveSnake() == TRUE)
-		{
+			if (MoveSnake() == TRUE)
+			{
+
+			}
 		}
 
 		if (eatenFood == maxFood)
@@ -111,6 +114,8 @@ void InitStage(int stage)
 
 	head = 2;
 	tail = 0;
+	now.x = 7;
+	now.y = 5;
 	dir = RIGHT;
 
 	for (i = 0; i < 80; i++)
@@ -165,15 +170,44 @@ BOOL MoveSnake()
 {
 	int headch;
 	int len;
+	int prev;
 
 	for (;;)
 	{
 		gotoxy(60, 23);
-		len = headch - tail;
+		len = head - tail;
 		if (len < 0)
 			len += QS;
 		printf("²¿¸® ±æÀÌ : %d ", len);
 		ProcessKey();
+
+		switch (dir)
+		{
+		case LEFT:
+			now.x--;
+			break;
+		case RIGHT:
+			now.x++;
+			break;
+		case UP:
+			now.y++;
+			break;
+		case DOWN:
+			now.y--;
+			break;
+		}
+
+		head = (head == QS - 1 ? 0  : head + 1);
+		snake[head] = now;
+
+		if (inctail == 0)
+			tail = (tail == QS - 1 ? 0 : tail + 1);
+		else
+			inctail--;
+
+		headch = getchon(now.x, now.y);
+		putchxy(snake[head].x, snake[head].y, 'S');
+		prev = (head == 0 ? QS - 1 : head - 1);
 	}
 }
 
