@@ -3,10 +3,6 @@
 #define QS 1600
 #define putchxy(x,y,ch) {gotoxy(x,y); _putch;(ch);}
 
-int getchon(int x, int y);
-void InitStage(int stage);
-BOOL MoveSnake();
-
 /*먹이 먹기
 움직이기
 길이 길어지기
@@ -15,6 +11,14 @@ BOOL MoveSnake();
 스테이지 선택
 게임 정지*/
 
+int getchon(int x, int y);
+void InitStage(int stage);
+void waitanykey();
+BOOL MoveSnake();
+void ProcessKey();
+
+enum tag_Dir { LEFT = 75, RIGHT = 77, UP = 72, DOWN = 80 } dir;
+
 struct tag_Point
 {
 	int x, y;
@@ -22,14 +26,14 @@ struct tag_Point
 
 tag_Point snake[QS];
 
+int head, tail;
 int maxFood;
-int life;
-int speed;
+int life,speed;
 int stage;
 
 void main()
 {
-	int eatFood;
+	int eatenFood;
 	int ch;
 	int x, y;
 
@@ -43,9 +47,9 @@ void main()
 		gotoxy(0, 23); printf("스테이지 : %d", stage + 1);
 		gotoxy(20, 23); printf("남은 기회 : %d", life);
 
-		for (eatFood=0;eatFood<maxFood;eatFood++)
+		for (eatenFood=0;eatenFood<maxFood;eatenFood++)
 		{
-			gotoxy(40, 23); printf("남은 먹이 : %d ", maxFood - eatFood);
+			gotoxy(40, 23); printf("남은 먹이 : %d ", maxFood - eatenFood);
 			gotoxy(60, 23); printf("꼬리 길이 : 2 ");
 			do
 			{
@@ -57,7 +61,7 @@ void main()
 			printf("%d", random(9) + 1);
 		}
 
-		if (eatFood == 0)
+		if (eatenFood == 0)
 		{
 			ch = _getch();
 			if (ch == 0xE0)
@@ -85,7 +89,7 @@ void main()
 		{
 		}
 
-		if (eatFood == maxFood)
+		if (eatenFood == maxFood)
 		{
 			gotoxy(12, 20);
 			puts("축하합니다. 아무 키나 누르시면 다음 스테이지로 갑니다.");
@@ -104,6 +108,10 @@ void InitStage(int stage)
 	snake[1].x = 6; snake[1].y = 5;
 	snake[2].x = 7; snake[2].y = 5;
 	gotoxy(5, 5); puts("##S");
+
+	head = 2;
+	tail = 0;
+	dir = RIGHT;
 
 	for (i = 0; i < 80; i++)
 	{
@@ -155,13 +163,70 @@ void InitStage(int stage)
 
 BOOL MoveSnake()
 {
+	int headch;
+	int len;
+
 	for (;;)
 	{
-
+		gotoxy(60, 23);
+		len = headch - tail;
+		if (len < 0)
+			len += QS;
+		printf("꼬리 길이 : %d ", len);
+		ProcessKey();
 	}
 }
 
 //x,y 위치의 문자 조사
+
+void ProcessKey()
+{
+	int ch;
+
+	if (!_kbhit())
+	{
+		return;
+	}
+	ch = _getch();
+
+	if (ch == 0xE0 || ch == 0)
+	{
+		ch = _getch();
+		
+		switch (ch)
+		{
+		case LEFT:
+			if (dir != RIGHT)
+				dir = LEFT;
+			break;
+		case RIGHT:
+			if (dir != LEFT)
+				dir = RIGHT;
+			break;
+		case UP:
+			if (dir != DOWN)
+				dir = UP;
+			break;
+		case DOWN:
+			if (dir != UP)
+				dir = DOWN;
+			break;
+		}
+	}
+	else
+	{
+		switch (tolower(ch))
+		{
+		case 27:
+			setcursortype(NORMALCURSOR);
+			exit(0);
+		case ' ':
+			waitanykey();
+			break;
+		}
+	}
+}
+
 int getchon(int x, int y)
 {
 	COORD Cur;
@@ -173,4 +238,14 @@ int getchon(int x, int y)
 	ReadConsoleOutputCharacter(GetStdHandle(STD_OUTPUT_HANDLE),
 							   &Char, 1, Cur, &dwRead);
 	return Char;
+}
+
+void waitanykey()
+{
+	int ch;
+	ch = _getch();
+	if (ch == 0xE0 || ch == 0)
+	{
+		_getch();
+	}
 }
