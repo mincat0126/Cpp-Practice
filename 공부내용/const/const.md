@@ -1,5 +1,5 @@
 # const
-**const**: 값을 변경할 수 없는 상수  
+**const**: 값을 변경할 수 없는 상수를 정의  
 &nbsp;&nbsp;&nbsp;**선언**: const 타입 변수명 = 초기값;  
 > const를 붙일 경우 초기값을 반드시 지정해야 한다.  
 > const 선언 후 타입을 생략할 경우 int로 간주한다.  
@@ -32,4 +32,6 @@ void main()
      *pi4=0;                 // 에러 : 대상체가 상수이므로 변경할 수 없다.
 }</pre><br><br><br>
 
-# 
+# volatile
+**volatile**: 변수에 대해 최적화 처리를 금지시키는 키워드  
+> const와 volatile을 cv 지정라고 부른다.
