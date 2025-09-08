@@ -33,7 +33,7 @@ void main()
     printf("SIZE=%d\n", SIZE);
 }</pre><br><br><br><br><br>
 
-# #error
+# #error, #line
 **#error**: 지정한 에러 메시지를 출력하고 전처리 과정에서 컴파일을 중자히도록 하는 전처리문
 
 **#line**: __LINE__, __FILE__ 매크로를 재정의하는 전처리문  
