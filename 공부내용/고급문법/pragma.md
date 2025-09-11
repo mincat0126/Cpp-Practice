@@ -10,3 +10,35 @@
 
 # once
 **once**: 헤더 파일에 써 두면 컴파일러가 딱 한 번만 헤더 파일을 포함하여 컴파일 시간을 절약하는 지시자
+
+<br><br><br><br><br>
+
+# pack
+**pack**: pack 지시자 이후부터 선언되는 구조체의 정렬 방식을 지정하는 지시자  
+&nbsp;&nbsp;&nbsp;**형태**: #pragma pack(정렬값)  
+&nbsp;&nbsp;&nbsp;**형태**: #pragma pack(push,정렬값)  
+&nbsp;&nbsp;&nbsp;**형태**: #pragma pack(pop,정렬값)  
+> 프로젝트 설정 대화상자에서 구조체 정렬 방식을 각 모듈별로 조정할 수 있지만, pack 지시자는 소스 중간 원하는 구조체에 대해 변경할 수 있다.   
+> 정렬값의 디폴트는 8이며 정렬값을 생략할 경우 디폴트 정렬값으로 돌아간다.    
+> pack(정렬값)으로 정렬값을 변경하면 이후부터 선언되는 구조체는 이 정렬값의 영향을 받는다.   
+> 특정 구조체에 대해서만 임시적으로 원하는 정렬값을 적용한 후 원래의 정렬값으로 돌아오려면 변경하기 전에 원래 값을 push, pop으로 보관한다.  
+> 컴파일러는 내부에 정렬값 저장을 위한 스택을 유지하고 있으며 이 스택에 정렬 상태를 LIFO 원칙에 따라 저장하고 다시 빼내올 수 있다.  
+> 정렬값 앞에 push를 넣으면 현재의 정렬 상태를 스택에 저장하면서 정렬값으로 변경하는데 정렬값을 생량하면 스택에 저장하기만 한다.  
+> 정렬값 앞에 pop을 넣으면 스택 최상단 정렬값을 제거하고 새로운 정렬값으로 변경하는데 정렬값을 생략하면 스택에서 꺼낸 정렬값으로 설정한다.
+> push와 pop은 원하는만큼 중첩해서 사용 가능하다.
+
+<pre>#pragma pack(2)
+struct st1 { short s; int i; };   //2바이트 정렬 총 6바이트
+#pragma pack(4)
+struct st2 { short s; int i; };   //4바이트 정렬 총 8바이트</pre>
+
+<pre>#pragma pack(push,1)
+struct Header
+{
+     char Magic[2];
+     int Version;
+     char NumRecord;
+     double xsize, ysize;
+};
+
+#pragma pack(pop)</pre>
