@@ -41,4 +41,28 @@ struct Header
      double xsize, ysize;
 };
 
-#pragma pack(pop)</pre>
+#pragma pack(pop)</pre><br><br><br><br>
+
+# warning
+**warning: 컴파일러가 경고를 출력하는 방법을 바꾸는 지시자  
+&nbsp;&nbsp;&nbsp;**형태**: #pragma warning(경고제어문:경고번호)  
+> 경고 제어문은 콜론으로 여러개 나열 가능하며, 경고 번호는 공백으로 여러개 나열 가능하다.   
+> 경고는 심각한 정도에 따라 1~4 단계까지 분류되어 있다(4가 약한 경고)  
+> 소스 어디에서나 이 명령을 삽입하면 이후부터 컴파일러가 경고를 통제하는 방법이 변경된다.
+
+|제어문|설명|
+|----|----|
+|once:번호|반복되는 경고를 한 번만 출력|
+|defalut:번호|	원래 설정대로 되돌리기|
+|disable:번호|경고를 출력하지 않기|
+|error:번호|경고를 에러로 처리|
+|레벨:번호|경고의 레벨(1~4)을 변경|
+|once:번호|반복되는 경고를 한 번만 출력|
+|push[,n]|모든 경고의 레벨을 저장. n이 있을 경우 저장과 동시에 전역 경고 레벨을 n으로 변경|
+|pop|스택에 마지막으로 저장된 경고 레벨을 복원|
+
+<pre>
+#pragma warning (disable:4101)        // 경고를 무시
+#pragma warning (once:4101)           // 4101경고를 한 번만 출력
+#pragma warning (error:4700)          // 경고 대신 에러를 출력
+#pragma warning (3:4706)              // 4706번 경고를 레벨 3으로 증가</pre>
