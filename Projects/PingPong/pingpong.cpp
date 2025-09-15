@@ -12,6 +12,11 @@ void HideCursor();
 class Paddle
 {
 public: int x, y;
+	  Paddle(int posX)
+	  {
+		  x = posX;
+		  y = HEIGHT / 2 - 2; //Paddle ¸Ç À­ºÎºÐ
+	  }
 };
 
 class Game
@@ -20,6 +25,10 @@ private :
 	Paddle left, right;
 
 public:
+	Game() :left(2), right(WIDTH - 3)
+	{
+
+	}
 
 	void DrawScreen()
 	{
@@ -29,7 +38,11 @@ public:
 			for (int j = 0; j < WIDTH; j++)
 			{
 				if (j == 0 || j == WIDTH - 1) cout << "#";
+				else if (j == left.x && i >= left.y && i < left.y + 4) cout << "|"; //left paddle
+				else if (j == right.x && i >= right.y && i < right.y + 4) cout << "|";//right paddle
+				else cout << " ";
 			}
+			cout << "\n";
 		}
 	}
 
