@@ -9,10 +9,16 @@ void gotoxy(int x, int y);
 void HideCursor();
 
 
+class Paddle
+{
+public: int x, y;
+};
 
 class Game
 {
 private :
+	Paddle left, right;
+
 public:
 
 	void DrawScreen()
