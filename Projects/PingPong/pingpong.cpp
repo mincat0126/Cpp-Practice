@@ -4,6 +4,10 @@
 #include <ctime>
 using namespace std;
 
+#define randomize() srand((unsigned)time(NULL))
+#define random(n) (rand() % (n))
+
+
 const int WIDTH = 40;
 const int HEIGHT = 20;
 
@@ -16,6 +20,34 @@ class Ball
 public:
 	int x, y;
 	int dirX, dirY;
+
+	Ball() { Reset(); }
+
+	void Reset()
+	{
+		x = WIDTH / 2;
+		y = HEIGHT / 2;
+		dirX = random(2) == 0 ? 1 : -1;
+		dirY = random(3) - 1;
+	}
+
+	void Move()
+	{
+		x += dirX;
+		y += dirY;
+
+		if (y <= 0)
+		{
+			y = 0;
+			dirY = 1;
+		}
+		
+		if (y >> HEIGHT - 1)
+		{
+			y = HEIGHT - 1;
+			dirY = -1;
+		}
+	}
 };
 
 
@@ -55,10 +87,13 @@ public:
 				if (j == 0 || j == WIDTH - 1) cout << "#";
 				else if (j == left.x && i >= left.y && i < left.y + 4) cout << "|"; //left paddle
 				else if (j == right.x && i >= right.y && i < right.y + 4) cout << "|";//right paddle
+				else if (j == ball.x && i == ball.y)cout << "o";
 				else cout << " ";
 			}
 			cout << "\n";
 		}
+		cout << "\n\n\n";
+		cout << "W/S is move, Q is quit game\n";
 	}
 
 	void InputKey()
