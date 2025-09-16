@@ -62,6 +62,15 @@ public: int x, y;
 
 	  void MoveUp() { if (y > 0)y--; }
 	  void MoveDown() { if (y + 4 < HEIGHT)y++; }
+
+	  int collisionPoint(int ballX, int ballY)
+	  {
+		  if (ballX == x && ballY >= y && ballY < y + 4)
+		  {
+			  return ballY -y;
+		  }
+		  return -1; //Ãæµ¹ x
+	  }
 };
 
 
@@ -121,6 +130,25 @@ public:
 	void Logic()
 	{
 		ball.Move();
+
+		int hitL = left.collisionPoint(ball.x, ball.y);
+		int hitR = right.collisionPoint(ball.x, ball.y);
+
+		if (hitL != -1)
+		{
+			ball.dirX = 1;
+			if (hitL == 0)ball.dirY = -1; //¸Ç À§
+			else if (hitL == 1 || hitL == 2) ball.dirY = 0;//Áß¾Ó
+			else if (hitL == 3)ball.dirY = 1;//¸Ç ¹Ø
+		}
+
+		if (hitR != -1)
+		{
+			ball.dirX = -1;
+			if (hitR == 0)ball.dirY = -1; //¸Ç À§
+			else if (hitR == 1 || hitR == 2) ball.dirY = 0;//Áß¾Ó
+			else if (hitR == 3)ball.dirY = 1;//¸Ç ¹Ø
+		}
 
 		if (ball.x <= 0)
 		{
