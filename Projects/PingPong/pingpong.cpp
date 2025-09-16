@@ -39,7 +39,7 @@ public:
 		if (y <= 0)
 		{
 			y = 0;
-			dirY = 1;
+			dirY;
 		}
 		
 		if (y >= HEIGHT - 1)
