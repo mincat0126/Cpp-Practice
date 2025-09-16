@@ -1,5 +1,7 @@
 #include <iostream>
 #include <windows.h>
+#include <conio.h>
+#include <ctime>
 using namespace std;
 
 const int WIDTH = 40;
@@ -7,6 +9,14 @@ const int HEIGHT = 20;
 
 void gotoxy(int x, int y);
 void HideCursor();
+
+
+class Ball
+{
+public:
+	int x, y;
+	int dirX, dirY;
+};
 
 
 class Paddle
@@ -17,11 +27,16 @@ public: int x, y;
 		  x = posX;
 		  y = HEIGHT / 2 - 2; //Paddle ¸Ç À­ºÎºÐ
 	  }
+
+	  void MoveUp() { if (y > 0)y--; }
+	  void MoveDown() { if (y + 4 < HEIGHT)y++; }
 };
+
 
 class Game
 {
-private :
+private:
+	Ball ball;
 	Paddle left, right;
 
 public:
@@ -33,7 +48,7 @@ public:
 	void DrawScreen()
 	{
 		gotoxy(0, 0);
-		for(int i = 0; i < HEIGHT; i++)
+		for (int i = 0; i < HEIGHT; i++)
 		{
 			for (int j = 0; j < WIDTH; j++)
 			{
@@ -46,11 +61,34 @@ public:
 		}
 	}
 
+	void InputKey()
+	{
+		if (_kbhit())
+		{
+			char ch = _getch();
+			if (tolower(ch) == 'w') left.MoveUp();
+			if (tolower(ch) == 's') left.MoveDown();
+			if (tolower(ch) == 'q') exit(0);
+		}
+	}
+
+	void AI()
+	{
+		if (ball.x > WIDTH / 2)
+		{
+			if (ball.y < right.y) right.MoveUp();
+			else if (ball.y > right.y + 3) right.MoveDown();
+		}
+	}
+
 	void Run()
 	{
 		while (true)
 		{
 			DrawScreen();
+			InputKey();
+			AI();
+			Sleep(50);
 		}
 	}
 };
