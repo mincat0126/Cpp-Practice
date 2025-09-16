@@ -42,7 +42,7 @@ public:
 			dirY = 1;
 		}
 		
-		if (y >> HEIGHT - 1)
+		if (y >= HEIGHT - 1)
 		{
 			y = HEIGHT - 1;
 			dirY = -1;
