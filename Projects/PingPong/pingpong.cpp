@@ -70,11 +70,12 @@ class Game
 private:
 	Ball ball;
 	Paddle left, right;
+	int scoreLeft, scoreRight;
 
 public:
 	Game() :left(2), right(WIDTH - 3)
 	{
-
+		scoreLeft = scoreRight = 0;
 	}
 
 	void DrawScreen()
@@ -93,6 +94,7 @@ public:
 			cout << "\n";
 		}
 		cout << "\n\n\n";
+		cout << "Player: " << scoreLeft << "     AI: " << scoreRight << "\n";
 		cout << "W/S is move, Q is quit game\n";
 	}
 
@@ -120,7 +122,16 @@ public:
 	{
 		ball.Move();
 
-
+		if (ball.x <= 0)
+		{
+			scoreRight++;
+			ball.Reset();
+		}
+		if (ball.x >= WIDTH - 1)
+		{
+			scoreLeft++;
+			ball.Reset();
+		}
 	}
 
 	void Run()
