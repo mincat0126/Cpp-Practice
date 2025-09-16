@@ -116,6 +116,13 @@ public:
 		}
 	}
 
+	void Logic()
+	{
+		ball.Move();
+
+
+	}
+
 	void Run()
 	{
 		while (true)
@@ -123,6 +130,7 @@ public:
 			DrawScreen();
 			InputKey();
 			AI();
+			Logic();
 			Sleep(50);
 		}
 	}
