@@ -45,7 +45,7 @@ void main()
 &nbsp;&nbsp;&nbsp;**선언**: cin >> 변수;    
 
 **>> 연산자(추출 연산자)**: 데이터를 입력받아 변수에 저장  
-> 데이터의 타입은 객체가 알아서 판단한다.  
+> 데이터의 타입은 객체가 알아서 판단한다.   
 
 <pre>
 #include <iostream>
@@ -57,5 +57,71 @@ void main()
      cout << "정수를 입력하십시오 : ";
      cin >> i;
      cout << "입력한 값은 " << i << "입니다." << endl;
+}
+</pre><br><br><br><br><br>
+
+# new
+**new**: C++의 메모리 할당 연산자  
+&nbsp;&nbsp;&nbsp;**선언**: 포인터 = new 타입[(초기값)];    
+> new 다음에 할당 대상 타입을 밝히면 sizeof(타입)만큼의 메모리가 할당되고 할당된 포인터가 리턴된다.  
+> new가 리턴하는 번지는 같은 타입의 포인터 변수로 대입받는다.  
+> 할당과 동시에 메모리를 초기화하고 싶으면 타입 다음의 괄호에 원하는 초기값을 적되 초기화를 할 필요가 없으면 생략할 수 있다.  
+> 초기화하지 않은 메모리는 쓰레기값을 가진다.  
+> 메모리 부족 등의 이유로 할당에 실패하면 NULL을 리턴한다.    
+> 만약 할당만 하고 해제를 하지 않으면 메모리 일부를 사용할 수 없게 되는 메모리 누수가 발생하므로 동적 할당한 메모리는 반드시 delete해야 한다.  
+
+**delete**: 메모리 해제 연산자  
+&nbsp;&nbsp;&nbsp;**선언**: delete 포인터;  
+> 한 포인터에 대해 delete를 두 번 하는 것은 안되지만 NULL 포인터를 삭제하는 것은 가능하다.  
+> 동적으로 할당한 배열을 삭제할 때는 delete 대신 반드시 delete [ ] 문을 사용해야 한다.  
+
+<pre>
+#include <Turboc.h>
+
+void main()
+{
+     int *pi=new int;
+     *pi=123;
+     printf("*pi=%d\n",*pi);
+     delete pi;
+}
+</pre>
+<pre>
+#include <iostream>
+
+struct tag_Friend
+{
+    char Name[10];
+    int Age;
+    double Height;
+};
+
+void main()
+{
+    tag_Friend* pF = new tag_Friend;
+    strcpy(pF->Name, "아무개");
+    pF->Age = 22;
+    pF->Height = 177.7;
+
+    printf("이름=%s, 나이=%d, 키=%.1f\n", pF->Name, pF->Age, pF->Height);
+
+    delete pF;
+}
+</pre>
+<pre>
+#include <iostream>
+
+void main()
+{
+     int *ar=new int[5];
+     int i;
+     for (i=0;i<5;i++) {
+          ar[i]=i;
+     }
+
+     for (i=0;i<5;i++) {
+          printf("%d번째 = %d\n",i,ar[i]);
+     }
+     delete [] ar;
 }
 </pre>
