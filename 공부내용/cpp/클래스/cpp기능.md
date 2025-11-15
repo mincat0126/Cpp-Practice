@@ -18,7 +18,7 @@
 > 여러 개의 데이터를 이어서 출력할 때는 << 연산자를 계속해서 사용한다.  
 > endl은 개행 코드를 의미하며 확장열 '\n'과 기능적으로 동일하다.  
 
-<pre>#include <iostream>
+<pre>#include < iostream >
 using namespace std;
 
 void main()
@@ -48,7 +48,7 @@ void main()
 > 데이터의 타입은 객체가 알아서 판단한다.   
 
 <pre>
-#include <iostream>
+#include < iostream >
 using namespace std;
 
 void main()
@@ -76,7 +76,7 @@ void main()
 > 동적으로 할당한 배열을 삭제할 때는 delete 대신 반드시 delete [ ] 문을 사용해야 한다.  
 
 <pre>
-#include <Turboc.h>
+#include < iostream >
 
 void main()
 {
@@ -87,7 +87,7 @@ void main()
 }
 </pre>
 <pre>
-#include <iostream>
+#include < iostream >
 
 struct tag_Friend
 {
@@ -109,7 +109,7 @@ void main()
 }
 </pre>
 <pre>
-#include <iostream>
+#include < iostream >
 
 void main()
 {
