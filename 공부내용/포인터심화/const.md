@@ -5,6 +5,19 @@
 > const 선언 후 타입을 생략할 경우 int로 간주한다.  
 > const는 타입 뒤에 붙여도 상관없다.
 
+<pre>
+#include < stdio.h >
+
+const int Hour = 24;
+const int Min = 60;
+const int Sec = 60;
+
+void main()
+{                                                      //<실행결과>
+    printf("하루는 %d초입니다.\n", Hour * Min * Sec);   //하루는 86000초입니다.  
+}
+</pre>
+
 <br><br><br>
 ## const 포인터
 > 상수를 가리키는 포인터(const 타입)을 상수 지시 포인터라고 한다.  
