@@ -51,5 +51,6 @@ void main()
 }</pre><br><br><br>
 
 # volatile
-**volatile**: 변수에 대해 최적화 처리를 금지시키는 키워드  
+**volatile**: 변수에 대해 최적화 처리를 금지시키는 키워드   
+&nbsp;&nbsp;&nbsp;**선언**: voaltile 타입 변수명;  
 > const와 volatile을 cv 지정라고 부른다.
